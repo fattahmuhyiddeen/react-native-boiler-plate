@@ -2,8 +2,8 @@ import React from 'react';
 import { TextInput, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
 import * as deviceAction from 'ducks/device';
-import Route from 'route';
-import NavigationService from 'route/NavigationService';
+import AppContainer from 'route';
+import * as NavigationService from 'route/NavigationService';
 
 class App extends React.PureComponent {
   componentDidMount() {
@@ -28,7 +28,11 @@ class App extends React.PureComponent {
     deviceAction.setKeyboard({ isKeyboardAppear: false, keyboardHeight: 0 });
 
   render() {
-    return null;
+    return (
+      <AppContainer
+        ref={instance => NavigationService.setTopLevelNavigator(instance)}
+      />
+    )
   }
 }
 
