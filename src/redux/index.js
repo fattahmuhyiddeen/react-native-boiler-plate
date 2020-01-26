@@ -33,7 +33,8 @@ function configStore(initialState) {
   return store;
 }
 
-export const getStore = () => store;
+const getStore = () => store;
+export const getState = () => getStore() && getStore().getState();
 export const dispatch = data => getStore() && getStore().dispatch(data);
 
 export default configStore;
