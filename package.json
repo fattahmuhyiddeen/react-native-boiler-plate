@@ -5,12 +5,14 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "postinstall": "npx jetify",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
+    "jetifier": "^1.6.5",
     "moment": "^2.24.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
