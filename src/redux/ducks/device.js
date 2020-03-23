@@ -1,4 +1,4 @@
-import { dispatch } from 'root-of-redux';
+import { dispatch } from '@redux';
 const NAMESPACE = 'device';
 
 export const SET_KEYBOARD = `${NAMESPACE}/SET_KEYBOARD`;

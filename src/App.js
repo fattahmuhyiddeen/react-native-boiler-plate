@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextInput, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
-import * as deviceAction from 'ducks/device';
-import AppContainer from 'route';
-import * as NavigationService from 'route/NavigationService';
+import * as deviceAction from '@ducks/device';
+import { AuthNav } from '@route';
+import { navigationRef, isMountedRef } from '@route/NavigationService';
+import { NavigationContainer } from '@react-navigation/native';
 
-class App extends React.PureComponent {
-  componentDidMount() {
-    //setting for keyboard event
-    Keyboard.addListener(
-      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
-      this.onKeyboardAppear
-    );
-    Keyboard.addListener(
-      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
-      this.onKeyboardHide
-    );
-    // end setting for keyboard event
-  }
+const App = () => {
+
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => (isMountedRef.current = false);
+  }, []);
+
+
   onKeyboardAppear = e =>
     deviceAction.setKeyboard({
       isKeyboardAppear: true,
@@ -27,13 +24,25 @@ class App extends React.PureComponent {
   onKeyboardHide = () =>
     deviceAction.setKeyboard({ isKeyboardAppear: false, keyboardHeight: 0 });
 
-  render() {
-    return (
-      <AppContainer
+
+  useEffect(() => {
+    Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      onKeyboardAppear
+    );
+    Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      onKeyboardHide
+    );
+  }, []);
+
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <AuthNav
         ref={instance => NavigationService.setTopLevelNavigator(instance)}
       />
-    )
-  }
+    </NavigationContainer>
+  )
 }
 
 export default App;

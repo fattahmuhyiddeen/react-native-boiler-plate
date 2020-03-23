@@ -1,32 +1,15 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const config = {
-  headerMode: 'none'
-};
+const Stack = createStackNavigator();
 
-const AuthNavigator = createStackNavigator(
-  {
-    Home: { screen: () => null },
-  },
-  config
-);
-
-const NonAuthNavigator = createStackNavigator(
-  {
-    Login: { screen: () => null },
-  },
-  config
-);
-
-const AppNavigator = createSwitchNavigator(
-  {
-    NonAuthNavigator,
-    AuthNavigator,
-  },
-  {
-    initialRouteName: 'AuthNavigator',
-  }
+// const config = {
+//   headerMode: 'none'
+// };
+export const AuthNav = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Home" component={() => null} />
+  </Stack.Navigator>
 )
 
-export default createAppContainer(AppNavigator);
+// export default createAppContainer(AppNavigator);
