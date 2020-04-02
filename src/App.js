@@ -16,13 +16,13 @@ const App = () => {
 
 
   onKeyboardAppear = e =>
-    deviceAction.setKeyboard({
+    deviceAction.setDevice({
       isKeyboardAppear: true,
       keyboardHeight: e.endCoordinates.height,
     });
 
   onKeyboardHide = () =>
-    deviceAction.setKeyboard({ isKeyboardAppear: false, keyboardHeight: 0 });
+    deviceAction.setDevice({ isKeyboardAppear: false, keyboardHeight: 0 });
 
 
   useEffect(() => {
