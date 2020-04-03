@@ -19,10 +19,10 @@ public class MainActivity extends ReactActivity {
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (BuildConfig.DEBUG) {
-        }else{
+        // if (BuildConfig.DEBUG) {
+        // }else{
             SplashScreen.show(this);
-        }
+        // }
         super.onCreate(savedInstanceState);
     }
 
