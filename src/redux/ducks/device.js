@@ -1,4 +1,5 @@
 import { dispatch } from '@redux';
+import SplashScreen from "react-native-splash-screen";
 const NAMESPACE = 'device';
 
 export const SET_DEVICE = `${NAMESPACE}/SET_DEVICE`;
@@ -14,6 +15,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case "persist/REHYDRATE":
+      SplashScreen.hide();
+      return state;
     case SET_DEVICE:
       return { ...state, ...action.data }
     default:
