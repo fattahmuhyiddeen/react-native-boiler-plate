@@ -1,0 +1,29 @@
+update_fastlane
+
+default_platform(:ios)
+
+note = "bug fix"
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :deploy do
+    increment_build_number(xcodeproj: "mobileapp.xcodeproj")
+    build_app(workspace: "mobileapp.xcworkspace", scheme: "mobileapp", xcargs: "-allowProvisioningUpdates")
+    upload_to_testflight(
+      beta_app_description: note,
+      changelog: note,
+      skip_waiting_for_build_processing: false,
+      beta_app_feedback_email: "fattahmuhyiddeen@gmail.com",
+      demo_account_required: true,
+      beta_app_review_info: {
+          contact_email: "fattahmuhyiddeen@gmail.com",
+          contact_first_name: "Fattah",
+          contact_last_name: "Muhyiddeen",
+          contact_phone: "+60132572860",
+          demo_account_name: "abc@abc.com",
+          demo_account_password: "password",
+          notes: note
+        },
+      )
+  end
+end

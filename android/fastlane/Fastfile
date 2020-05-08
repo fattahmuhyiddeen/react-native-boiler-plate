@@ -1,0 +1,29 @@
+update_fastlane
+
+default_platform(:android)
+testers = "fattahmuhyiddeen@gmail.com"
+note = "bug fix"
+
+platform :android do
+  before_all do
+    # Get number of commits
+      version_code = number_of_commits(all: true)
+      # Ensure there are no uncommitted changes
+      # ensure_git_status_clean
+      # Assign number of commits to gradle version code
+      increment_version_code(version_code: version_code)
+  end
+
+  lane :deploy do
+    gradle(task: "clean")
+    gradle(task: "assemble", build_type: "Release")
+    
+    firebase_app_distribution(
+        app: "1:406912002914:android:3c5e8c3cb3046db43b9a3b",
+        release_notes: note,
+        testers: testers,
+        firebase_cli_path: "/usr/local/bin/firebase"
+    )
+    # upload_to_play_store
+  end
+end
